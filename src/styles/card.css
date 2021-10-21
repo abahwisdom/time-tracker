@@ -1,0 +1,126 @@
+/* card */
+.card-container{
+    max-width: 660px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .card{
+    border-radius: 10px;
+    /* display: flex;
+    flex-direction: row; */
+    position: relative;
+    margin: 10px;
+    width: 200px;
+  }
+  
+  
+  
+  .card-details{
+    background-color: hsl(235, 46%, 20%);
+    /* padding: 20px; */
+    width: 100%;
+    position: absolute;
+    top: 34px;
+    border-radius: 10px;
+    height: 145px;
+  }
+  
+  .card-details:hover{
+    background-color: hsl(235, 46%, 40%);
+    /* border-radius: 10px; */
+  }
+  
+  
+  
+  .card-details *{
+    margin: 10px 0;
+    padding: 3px 20px;
+  }
+  
+  .card-name-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+  
+  }
+  
+  
+  .card-name-container img{
+    width: 15px;
+    margin: 10px 0 0 0;
+  }
+  
+  .card-name-container img:hover{
+    cursor: pointer;
+  }
+  
+  .card-name{
+    font-size: 15px;
+    margin: 10px 0 0 0;
+  }
+  
+  .card-time{
+    font-size: 37px;
+  }
+  
+  .card-last-time{
+    font-size: 13px;
+    color: hsl(236, 100%, 87%);
+  }
+  
+  .icon-container{
+    min-height: 60px;
+    position: absolute;
+    width: 100%;
+    border-radius: 10px;
+    text-align: right;
+  }
+  
+  .icon-container img{
+    width: 56px;
+    height: auto;
+    padding: 0 10px;
+  }
+  
+  .icon-work{
+    background-color:hsl(15, 100%, 70%) ;
+  }
+  
+  .icon-play{
+    background-color:hsl(195, 74%, 62%) ;
+  }
+  
+  .icon-study{
+    background-color:hsl(348, 100%, 68%) ;
+  }
+  
+  .icon-exercise{
+    background-color:hsl(145, 58%, 55%) ;
+  }
+  
+  .icon-social{
+    background-color:hsl(264, 64%, 52%);
+  }
+  
+  .icon-selfcare{
+    background-color:hsl(43, 84%, 65%) ;
+  }
+
+  @media (max-width: 900px){
+    .card-container{
+        max-width: 660px;
+        display:block;
+      }
+    
+    .card{
+        width: 300px;
+    }
+
+    .card-details{
+        position: relative;
+        margin: 50px auto;
+    }
+
+  }  

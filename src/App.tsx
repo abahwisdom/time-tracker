@@ -7,7 +7,7 @@ import Social from './assets/icon-social.svg'
 import Study from './assets/icon-study.svg'
 import Work from './assets/icon-work.svg'
 import Selfcare from './assets/icon-self-care.svg'
-import Ellipsis from './assets/icon-ellipsis.svg'
+import Clock from './assets/icon-clock.svg'
 
 
 
@@ -37,33 +37,35 @@ const activityArray=[
     icon: Study,
   },
   
-  
-  
-  
 ]
 
 
 
 function App() {
 
-  const [timeType, setTimeType]= useState<'day'|'week'|'month'>('day');
+  function resetAll(){
+    window.localStorage.clear();
+    window.location.reload()
+  }
+
+
   return (
     <div className="app">
       <div className='menu-container'>
         <div className='profile'>
-          <div className='profile-pic-container'><img></img></div>
-          <div className='report'>Report for</div>
-          <div className='profile-name'>Jeremy Johnson</div>
+          <div className='profile-pic-container'><img src={Clock}></img></div>
+          <div className='report'>Your Online</div>
+          <div className='profile-name'>TimeTrackr</div>
         </div>
         <div className='menu'>
-          <div className='menu-item'>Daily</div>
-          <div className='menu-item'>Weekly</div>
-          <div className='menu-item'>Monthly</div>
+          <div className='menu-item' onClick={()=>window.location.reload()}>Cancel Session</div>
+          <div className='menu-item' onClick={resetAll} >Reset All Activities</div>
+          <a href='mailto:abahwisdom@gmail.com' className='menu-item'>Contact Developer</a>
         </div>
       </div>
       <div className='card-container'>
         {
-          activityArray.map((activity)=><ActivityCard activityName={activity.name} timeType={timeType} icon={activity.icon} />)
+          activityArray.map((activity)=><ActivityCard activityName={activity.name} icon={activity.icon} />)
         }
       </div>
       

@@ -4,31 +4,37 @@ import Pause from './assets/pause.svg'
 
 type AppProps={
     activityName: string,
-    lastTime?: number,
-    timeType?: string,
     icon?:string
-
-
 }
 
 const ActivityCard=(props:AppProps)=>{
 
+    const [lastStartTime, setLastStartTime]= useState<number>(0)
     const [elapsedTime, setElapsedTime]= useState<number>(0)
     const [playing, setPlaying]= useState<boolean>(false);
     const [clockId, setClockId]= useState<number>(0)
     const [formerTime, setFormerTime]= useState<number>(0)
     const [timeString, setTimeString]= useState<string>('00:00:00')
+    const [elapsedTimeString, setElapsedTimeString]= useState<string>('00:00:00')
 
     useEffect(()=>{
         setTimeString(msToTime(elapsedTime+formerTime))
     },[elapsedTime])
 
+    useEffect(()=>{
+        var localTime=window.localStorage.getItem(`${props.activityName}FormerTime`)
+        setTimeString(msToTime(elapsedTime+(localTime?JSON.parse(localTime):0)))
+        setFormerTime(localTime?JSON.parse(localTime):0)
+    },[])
+
 
     function startActivity(){
         var tempTime= new Date().valueOf();
+        setLastStartTime(tempTime);
 
         var tempClockId= window.setInterval(()=>{
-            setElapsedTime((new Date().valueOf() -tempTime))
+            setElapsedTime((new Date().valueOf() -tempTime));
+            setElapsedTimeString(msToTime(new Date().valueOf() -tempTime))
         }, 1000);
 
         setClockId(tempClockId);
@@ -40,9 +46,14 @@ const ActivityCard=(props:AppProps)=>{
     function endActivity(){
         window.clearInterval(clockId);
 
+        window.localStorage.setItem(`${props.activityName}FormerTime`, JSON.stringify(elapsedTime+ formerTime))
+
         setFormerTime(elapsedTime+formerTime);
+        
 
         setPlaying(false);
+
+        setElapsedTimeString('00:00:00')
         
     }
     
@@ -72,7 +83,8 @@ const ActivityCard=(props:AppProps)=>{
                 </div>
                 
                 <div className='card-time'>{timeString}</div>
-                <div className='card-last-time'>This {props.timeType}- {props.lastTime?props.lastTime:'0'}hrs</div>
+                {/* <div className='card-last-time'>Current Start Time: {lastStartTime!==0 && playing ? (`${new Date(lastStartTime).getHours()}:${new Date(lastStartTime).getMinutes()}:${new Date(lastStartTime).getSeconds()}`):'---'} </div> */}
+                <div className='card-last-time'>{playing ? `Current Session: ${elapsedTimeString}`:'Not Active'} </div>
 
             </div>
         </div>
