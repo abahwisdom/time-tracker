@@ -4,12 +4,12 @@ import Pause from './assets/pause.svg'
 
 type AppProps={
     activityName: string,
-    icon?:string
+    icon:string
 }
 
 const ActivityCard=(props:AppProps)=>{
 
-    const [lastStartTime, setLastStartTime]= useState<number>(0)
+    // const [lastStartTime, setLastStartTime]= useState<number>(0)
     const [elapsedTime, setElapsedTime]= useState<number>(0)
     const [playing, setPlaying]= useState<boolean>(false);
     const [clockId, setClockId]= useState<number>(0)
@@ -29,10 +29,10 @@ const ActivityCard=(props:AppProps)=>{
 
 
     function startActivity(){
-        var tempTime= new Date().valueOf();
-        setLastStartTime(tempTime);
+        var tempTime: number= new Date().valueOf();
+        // setLastStartTime(tempTime);
 
-        var tempClockId= window.setInterval(()=>{
+        var tempClockId: number= window.setInterval(()=>{
             setElapsedTime((new Date().valueOf() -tempTime));
             setElapsedTimeString(msToTime(new Date().valueOf() -tempTime))
         }, 1000);
@@ -58,10 +58,10 @@ const ActivityCard=(props:AppProps)=>{
     }
     
     function msToTime(duration:number) {
-        var milliseconds = Math.floor((duration % 1000) / 100),
-          seconds = Math.floor((duration / 1000) % 60),
-          minutes = Math.floor((duration / (1000 * 60)) % 60),
-          hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+        // var milliseconds = Math.floor((duration % 1000) / 100),
+        var seconds = Math.floor((duration / 1000) % 60)
+        var minutes = Math.floor((duration / (1000 * 60)) % 60)
+        var hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
       
         var hoursString = (hours < 10) ? "0" + hours : hours;
         var minutesString = (minutes < 10) ? "0" + minutes : minutes;

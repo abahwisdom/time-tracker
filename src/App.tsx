@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
 import ActivityCard from './card';
 import Play from './assets/icon-play.svg'
 import Exercise from './assets/icon-exercise.svg'
